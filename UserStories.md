@@ -15,3 +15,13 @@ As a visitor, I want to be able to filter hotels based on room availability and 
 As a visitor, I want to be able to order and filter hotels based on price to be able to find hotels within my preferred price range.
 
 As a visitor, I want to be able to order hotels based on distance from a given point so I can find hotels close to where I'll be spending my time.
+
+## Óli
+
+As a visitor, I want to view pictures of the hotel and rooms to see if they are suitable to my needs
+
+As a visitor, I want to be able to book a room for me to stay at
+
+As a visitor, I want to be able to view rooms i have booked and cancel them
+
+As a visitor, I want to be able to view the hotel on a map so i can see nearby landmarks
