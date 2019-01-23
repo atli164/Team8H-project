@@ -50,3 +50,14 @@ As a trip planner, I want to list travel packages which include hotel rooms, so 
 
 As a tax inspector, I need access to the tax identification numbers of the hotels, to fullfill my legal responsibility to survey hotel service providers. (Alveg spurning hvort við höfum þetta með (sem user story) en yfirvöld þyrftu allavega sér API til að fá upplýsingar um fyrirtækin sem nota síðuna)
 
+## Jón
+
+As a visitor, I want to be able to buy many rooms at once because I am ordering for a large group.
+
+As a hotel manager, I can change the description of the hotel because something is broken
+
+As a visitor, I want to be able to cancel the booking because I can’t go.
+
+As a visitor, I want to book rooms in a hotel for a certain number of nights at a certain date so that I know I have a booked room when I arrive.
+
+
