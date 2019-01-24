@@ -16,6 +16,8 @@ As a visitor, I want to be able to order and filter hotels based on price to be 
 
 As a visitor, I want to be able to order hotels based on distance from a given point so I can find hotels close to where I'll be spending my time.
 
+Mér finnst það sem Óli sýndi Book og hann samþykkti allt mjög gott. Þar sem það er aðeins og lítið má kannski bæta við þessu neðsta hjá mér og eitthvað um reviews?
+
 ## Óli
 
 As a visitor, I want to view pictures of the hotel and rooms to see if they are suitable to my needs
@@ -36,9 +38,9 @@ As a visitor, I want to see which hotels are pet friendly, because I have allerg
 
 As a visitor, I want to see when the checkout time for the hotel is, so I can plan when to leave the room.
 
-As a hotel manager, I want to be able to post a hotel and configure how many rooms are available for what price, so I can give potential customers information about my hotel. (orða betur?)
+As a hotel manager, I want to be able to post a hotel and configure how many rooms are available for what price, so I can give potential customers information about my hotel. (orða betur? Breyta í "and set what rooms are available and their respective prices"?)
 
-As a hotel manager, I want to be able to charge travelers who have booked a room, so I can confirm the room. (orða betur?)
+As a hotel manager, I want to be able to charge travelers who have booked a room, so I can confirm the room. (orða betur? Breyta í "so I can confirm the booking"?)
 
 As a hotel manager, I want to get payment information from customers when they book a room, so I have the ability to charge for late cancellation
 
@@ -46,9 +48,9 @@ As a hotel manager, I want to get payment information from customers when they b
 
 As a hotel manager, I want to be able to respond to reviews and dispute false ones, since reviews are very important when travelers choose hotels.
 
-As a trip planner, I want to list travel packages which include hotel rooms, so I can give travelers options. (orða betur, þörfin hér er að trip planners þurfa aðgang að sér API til að lista hluti)
+As a trip planner, I want to list travel packages which include hotel rooms, so I can give travelers options. (orða betur, þörfin hér er að trip planners þurfa aðgang að sér API til að lista hluti) (Breyta í "I want to have an interface to bundle together room offerings, so I can make bookings on the behalf of my customers"?)
 
-As a tax inspector, I need access to the tax identification numbers of the hotels, to fullfill my legal responsibility to survey hotel service providers. (Alveg spurning hvort við höfum þetta með (sem user story) en yfirvöld þyrftu allavega sér API til að fá upplýsingar um fyrirtækin sem nota síðuna)
+As a tax inspector, I need access to the tax identification numbers of the hotels, to fullfill my legal responsibility to survey hotel service providers. (Alveg spurning hvort við höfum þetta með (sem user story) en yfirvöld þyrftu allavega sér API til að fá upplýsingar um fyrirtækin sem nota síðuna ((atli) mér finnst þetta fínt user story))
 
 ## Jón
 
