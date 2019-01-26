@@ -20,7 +20,7 @@ Mér finnst það sem Óli sýndi Book og hann samþykkti allt mjög gott. Þar 
 
 ## Óli
 
-As a visitor, I want to view pictures of the hotel and rooms to see if they are suitable to my needs
+(A+?) As a visitor, I want to view pictures of the hotel and rooms to see if the room meet my expectations.
 
 As a visitor, I want to be able to book a room for me to stay at
 
@@ -30,7 +30,7 @@ As a visitor, I want to be able to view the hotel on a map so i can see nearby l
 
 ### Hérna eru sögur sem ég sýndi Mathias og hann gúdderaði að mestu leiti
 
-(A) As a visitor, I want to be able to read what amenities are available in the room in order to determine which room best matches my needs.
+(A) As a visitor, I want to be able to read what amenities are available in the room in order to determine of the room matches my needs.
 
 (A) As a visitor, I want to be able to sort rooms by size, price, and amenities, so I am able to pick a room that suits my needs.
 
