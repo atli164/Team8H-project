@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, icelandic]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{gensymb}
+\usepackage{parskip}
+\usepackage{mathtools}
+\usepackage{xfrac}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{verbatim}
+\usepackage{multicol}
+\parskip 0pt
+
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\fix}{fix}
+\newcommand\floor[1]{\left\lfloor#1\right\rfloor}
+\newcommand\ceil[1]{\left\lceil#1\right\rceil}
+\newcommand\abs[1]{\left|#1\right|}
+\newcommand\p[1]{\left(#1\right)}
+\newcommand\sqp[1]{\left[#1\right]}
+\newcommand\cp[1]{\left\{#1\right\}}
+\renewcommand\qedsymbol{$\blacksquare$}
+\renewcommand\Im{\operatorname{Im}}
+\renewcommand\Re{\operatorname{Re}}
+
+\pagenumbering{gobble}
+
+\graphicspath{{myndir/}}
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE University of Iceland \par}
+	\vspace{1cm}
+	{\scshape\Large HBV401G Software Development \par}
+	\vspace{1.5cm}
+	{\huge\bfseries User stories \par}
+	\vspace{2cm}
+	{\Large\itshape Atli Fannar Franklín \\ Ólafur Einar Ómarsson \\ Jón Freyr Bjarnason \\ 8H\par}
+	\vfill
+	Teacher: \par
+	Matthias Book \par 
+
+	\vfill
+
+	{\large \today\par}
+\end{titlepage}
+
+\section*{Team members:}
+
+On this team there are three members: Atli Fannar Franklín (kt: 2612982609), Ólafur Einar Ómarsson (kt: 2009912739) and Jón Freyr Bjarnason (kt: 0509932649). The team number is 8H. Atli Fannar Franklín will be presenting next Wednesday.
+
+\section*{User stories:}
+
+\begin{itemize}
+
+\item As a visitor, I want to be able to order hotels based on distance from a given point so I can find hotels close to where I'll be spending my time.
+
+\item As a visitor, I want to view pictures of the hotel and rooms to see if the room meets my expectations.
+
+\item As a visitor, I want to be able to read what amenities are available in the room in order to determine if the room matches my needs.
+
+\item As a visitor, I want to be able to sort rooms by size, price, and amenities, so I am able to pick a room that suits my needs.
+
+\item As a visitor, I want to see which hotels are pet friendly, because I have allergies.
+
+\item As a visitor, I want to see when the checkout time for the hotel is, so I can plan when to leave the room.
+
+\item As a hotel manager, I want to be able to post a hotel and configure how many rooms are available and their respective prices, so I can give potential customers information about my hotel. 
+
+\item As a hotel manager, I want to be able to charge travelers who have booked a room, so I can confirm the booking. 
+
+\item As a hotel manager, I want to get payment information from customers when they book a room, so I have the ability to charge for late cancellation
+
+\item As a hotel manager, I want to be able to respond to reviews and dispute false ones, since reviews are very important when travelers choose hotels.
+
+\item As a trip planner, I want to have an interface to bundle together room offerings, so I can make bookings on the behalf of my customers.
+
+\item As a tax inspector, I need access to the tax identification numbers of the hotels, to fullfill my legal responsibility to survey hotel service providers. 
+
+\end{itemize}
+
+\end{document}
