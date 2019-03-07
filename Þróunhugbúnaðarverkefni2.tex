@@ -1,0 +1,173 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, icelandic]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{gensymb}
+\usepackage{parskip}
+\usepackage{mathtools}
+\usepackage{xfrac}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{verbatim}
+\usepackage{multicol}
+\usepackage{tikz-uml}
+\parskip 0pt
+
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\fix}{fix}
+\newcommand\floor[1]{\left\lfloor#1\right\rfloor}
+\newcommand\ceil[1]{\left\lceil#1\right\rceil}
+\newcommand\abs[1]{\left|#1\right|}
+\newcommand\p[1]{\left(#1\right)}
+\newcommand\sqp[1]{\left[#1\right]}
+\newcommand\cp[1]{\left\{#1\right\}}
+\renewcommand\qedsymbol{$\blacksquare$}
+\renewcommand\Im{\operatorname{Im}}
+\renewcommand\Re{\operatorname{Re}}
+
+\pagenumbering{gobble}
+
+\graphicspath{{myndir/}}
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE University of Iceland \par}
+	\vspace{1cm}
+	{\scshape\Large HBV401G Software Development \par}
+	\vspace{1.5cm}
+	{\huge\bfseries Domain Model \par}
+	\vspace{2cm}
+	{\Large\itshape Atli Fannar Franklín \\ Ólafur Einar Ómarsson \\ Jón Freyr Bjarnason \\ 8H\par}
+	\vfill
+	Teacher: \par
+	Matthias Book \par 
+
+	\vfill
+
+	{\large \today\par}
+\end{titlepage}
+
+On this team there are three members: Atli Fannar Franklín (kt: 2612982609), Ólafur Einar Ómarsson (kt: 2009912739) and Jón Freyr Bjarnason (kt: 0509932649). The team number is 8H. Atli Fannar Franklín will be presenting next Wednesday.  \\
+
+\hspace*{-1.25cm}
+\begin{tikzpicture}
+\umlclass[x=4.5,y=-5]{Hotel}{
+- id: int \\
+- name: String \\
+- country: String \\
+- postNum: int \\
+- latiPos: double \\
+- longPos: double \\
+- stars: int \\
+- hasPool: boolean \\
+- hasGym: boolean \\
+- hasClub: boolean \\
+}{
++ getters() \\
+- setters() \\
+}
+\umlclass[y=2]{Review}{
+- id: int \\
+- userId: int \\
+- hotelId: int \\
+- stars: int \\
+- content: String \\
+- leftAt: Date \\
+}{
++ getters() \\
+- setters() \\
+}
+\umlclass[x=10]{Room}{
+- id: int \\
+- hotelId: int \\
+- singleBeds: int \\
+- doubleBeds: int \\
+- foldedBeds: int \\
+- hasWifi: boolean \\
+- freeWifi: boolean \\
+- hasBreakfast: boolean \\
+- breakfastPrePaid: boolean \\
+- hasParking: boolean \\
+- isSmoking: boolean \\
+- withAView: boolean \\
+- hasBath: boolean \\
+- hasAC: boolean \\
+- hasMinibar: boolean \\
+- dailyCleaning: boolean \\
+- costPerNight: int \\
+}{
++ getters() \\
+- setters() \\
++ isAvailable(): bool
+}
+\umlclass[y=-2]{User}{
+- id: int \\
+- userName: String \\
+}{
++ getters() \\
+- setters() \\
+}
+\umlclass[x=5,y=2]{Booking}{
+- id: int \\
+- userId: int \\
+- roomId: int \\
+- fromDate: Date \\
+- toDate: Date \\
+- requests: String \\
+}{
++ getters() \\
+- setters() \\
++ isOngoing(): bool
+}
+\umlclass[y=-8]{HotelQuery}{
++ mustHavePool: boolean \\
++ musthaveGym: boolean \\
++ mustHaveClub: boolean \\
++ minStars: int \\
++ orderByName: boolean \\
++ orderByStars: boolean \\
++ orderByPos: boolean \\
++ latiNear: double \\
++ longNear: double \\
+}{
+}
+\umlclass[x=9.5, y=-8]{RoomQuery}{
++ limitToHotel: boolean \\
++ minBedNum: int \\
++ maxBedNum: int \\
++ mustHaveWifi: boolean \\
++ mustHaveBreakfast: boolean \\
++ mustHaveParking: boolean \\
++ mustBeSmoking: boolean \\
++ mustHaveView: boolean \\
++ mustHaveBath: boolean \\
++ mustHaveAC: boolean \\
++ mustHaveMinibar: boolean \\
++ mustHaveDailyCleaning: boolean \\
++ minCostPerNight: int \\
++ maxCostPerNight: int \\
+}{
+}
+
+\draw[->, very thick] (Room) -- (Hotel);
+\draw[->, very thick] (Booking) -- (Room);
+\draw[->, very thick] (Booking) -- (User);
+\draw[->, very thick] (Review) -- (User);
+\draw[->, very thick] (RoomQuery) -- (Hotel);
+\end{tikzpicture}
+
+\end{document}
