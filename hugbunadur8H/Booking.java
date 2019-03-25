@@ -11,6 +11,10 @@ public class Booking{
     private LocalDate toDate;
     private String requests;
     
+    public int getId() {
+        return id;
+    }
+    
     public int getUserId(){
         return userId;
     }
