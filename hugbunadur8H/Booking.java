@@ -39,8 +39,9 @@ public class Booking{
         return requests;
     }
 
-    public Booking(int id, int roomId, Date fromDate, Date toDate, String requests, User bookerUser, Room bookedRoom){
+    public Booking(int id, int userId, int roomId, Date fromDate, Date toDate, String requests, User bookerUser, Room bookedRoom){
         this.id = id;
+        this.userId = userId;
         this.roomId = roomId;
         this.fromDate = fromDate;
         this.toDate = toDate;
