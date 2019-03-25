@@ -9,7 +9,7 @@ public class Booking{
     private Room bookedRoom;
     private Date fromDate;
     private Date toDate;
-    private Date requests;
+    private String requests;
     
     public int getUserId(){
         return userId;
