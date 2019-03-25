@@ -10,6 +10,10 @@ public class Hotel {
     private boolean hasPool;
     private boolean hasGym;
     private boolean hasClub;
+    
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
