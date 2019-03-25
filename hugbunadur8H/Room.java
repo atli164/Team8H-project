@@ -23,6 +23,14 @@ public class Room {
     public Hotel getBelongsTo() {
         return belongsTo;
     }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public int getHotelId() {
+        return hotelId;
+    }
 
     public int getSingleBeds() {
         return singleBeds;
