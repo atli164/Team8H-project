@@ -5,8 +5,8 @@ public class Booking{
     private int id;
     private int userId;
     private int roomId;
-    private Date start_date;
-    private Date end_date;
+    private Date fromDate;
+    private Date toDate;
     private Date requests;
     
     public int getUserId(){
@@ -15,21 +15,21 @@ public class Booking{
     public int getroomId(){
         return roomId;
     }
-    public Date getStart_date(){
-        return start_date;
+    public Date getFromDate(){
+        return fromDate;
     }
-    public Date getEnd_date(){
-        return end_date;
+    public Date getToDate(){
+        return toDate;
     }
     public String getRequests(){
         return requests;
     }
 
-    public Booking(int id, int roomId, Date start_date, Date end_date, String requests){
+    public Booking(int id, int roomId, Date fromDate, Date toDate, String requests){
         this.id = id;
         this.roomId = roomId;
-        this.start_date = start_date;
-        this.end_date = end_date;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
         this.requests = requests;
     }
 }
