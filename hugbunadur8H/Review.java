@@ -1,6 +1,6 @@
 package hugbunadur8H;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Review {
 
@@ -11,7 +11,7 @@ public class Review {
   private Hotel aboutHotel;
   private int stars;
   private String content;
-  private Date leftAt;
+  private LocalDate leftAt;
 
   public int getId() {
     return id;
@@ -41,11 +41,11 @@ public class Review {
     return content;
   }
   
-  public Date getLeftAt() {
+  public LocalDate getLeftAt() {
     return leftAt;
   }
 
-  public Review(int id, int userId, int hotelId, int stars, String content, Date leftAt, User author, Hotel aboutHotel) {
+  public Review(int id, int userId, int hotelId, int stars, String content, LocalDate leftAt, User author, Hotel aboutHotel) {
     this.id = id;
     this.userId = userId;
     this.hotelId = hotelId;
