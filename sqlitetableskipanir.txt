@@ -1,0 +1,54 @@
+CREATE TABLE HotelRegistry (
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(50),
+    postNum INTEGER,
+    latiPos REAL,
+    longPos REAL,
+    stars INTEGER,
+    hasPool BOOLEAN,
+    hasGym BOOLEAN,
+    hasClub BOOLEAN
+);
+
+CREATE TABLE RoomRegistry (
+    id INTEGER PRIMARY KEY,
+    hotelId INTEGER,
+    singleBeds INTEGER,
+    doubleBeds INTEGER,
+    foldedBeds INTEGER,
+    hasWifi BOOLEAN,
+    freeWifi BOOLEAN,
+    hasBreakfast BOOLEAN,
+    breakfastPrePaid BOOLEAN,
+    hasParking BOOLEAN,
+    isSmoking BOOLEAN,
+    withAView BOOLEAN,
+    hasBath BOOLEAN,
+    hasAC BOOLEAN,
+    hasMinibar BOOLEAN,
+    dailyCleaning BOOLEAN,
+    costPerNight INTEGER
+);
+
+CREATE TABLE BookingRegistry (
+    id INTEGER PRIMARY KEY,
+    userId INTEGER,
+    roomId INTEGER,
+    fromDate DATE,
+    toDate DATE,
+    requests VARCHAR(255)
+);
+
+CREATE TABLE ReviewRegistry (
+    id INTEGER PRIMARY KEY,
+    userId INTEGER,
+    hotelId INTEGER,
+    stars INTEGER,
+    content VARCHAR(1000),
+    leftAt Date
+);
+
+CREATE TABLE UserRegistry (
+    id INTEGER PRIMARY KEY,
+    userName VARCHAR(30)
+);
