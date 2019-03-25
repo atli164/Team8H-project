@@ -1,5 +1,5 @@
 package hugbunadur8H;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Booking{
     private int id;
@@ -7,8 +7,8 @@ public class Booking{
     private User bookerUser;
     private int roomId;
     private Room bookedRoom;
-    private Date fromDate;
-    private Date toDate;
+    private LocalDate fromDate;
+    private LocalDate toDate;
     private String requests;
     
     public int getUserId(){
@@ -27,11 +27,11 @@ public class Booking{
         return bookedRoom;
     }
     
-    public Date getFromDate(){
+    public LocalDate getFromDate(){
         return fromDate;
     }
     
-    public Date getToDate(){
+    public LocalDate getToDate(){
         return toDate;
     }
     
@@ -39,7 +39,7 @@ public class Booking{
         return requests;
     }
 
-    public Booking(int id, int userId, int roomId, Date fromDate, Date toDate, String requests, User bookerUser, Room bookedRoom){
+    public Booking(int id, int userId, int roomId, LocalDate fromDate, LocalDate toDate, String requests, User bookerUser, Room bookedRoom){
         this.id = id;
         this.userId = userId;
         this.roomId = roomId;
