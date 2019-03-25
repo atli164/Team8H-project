@@ -23,7 +23,7 @@ public class Booking{
         return bookerUser;
     }
     
-    public int getroomId(){
+    public int getRoomId(){
         return roomId;
     }
     
