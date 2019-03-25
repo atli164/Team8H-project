@@ -9,12 +9,12 @@ public class HotelQuery{
     public boolean orderByStars;
     public boolean orderByPos;
     public double latiNear;
-    public double longNeat;
+    public double longNear;
 
     public HotelQuery(boolean mustHavePool, boolean mustHaveGym, 
             boolean mustHaveClub, int minStars, 
             boolean orderByName,boolean orderByStars, 
-            boolean orderByPos, double latiNear,double longNeat){
+            boolean orderByPos, double latiNear, double longNear){
         this.mustHavePool = mustHavePool;
         this.mustHaveGym = mustHaveGym;
         this.mustHaveClub = mustHaveClub;
@@ -23,6 +23,6 @@ public class HotelQuery{
         this.orderByStars = orderByStars;
         this.orderByPos = orderByPos;
         this.latiNear = latiNear;
-        this.longNeat = longNeat;
+        this.longNear = longNear;
     }
 }
