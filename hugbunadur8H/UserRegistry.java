@@ -29,20 +29,72 @@ public class UserRegistry {
         		int _userId = r.getInt(1);
         		int _userName = r.getString(2);
         		User result = new User(_userId, _userName);
-        		res.add(result);
+        		userL.add(result);
         	}
         } catch(SQLException e) {
-            res = null;
+            userL = null;
         } finally {
             try {
                 if(conn != null) {
                     conn.close();
                 }
             } catch(SQLException e) {
-                res = null;
+                userL = null;
             } finally {
-                return res;
+                return userL;
             }
         }
     }
+
+    public static boolean removeUser(int userId) {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch(ClassNotFoundException e) {
+            return false;
+        }
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM BookingRegistry WHERE userId = ?");
+            pstmt.setInt(1, userId);
+            pstmt.executeUpdate();
+            try {
+                if(conn != null) {
+                    conn.close();
+                }
+            } catch(SQLException e) {
+                return false;
+            }
+            return true;
+        } catch(SQLException e) {
+            return false;
+}        
+    }
+
+    public static boolean addUser(User user) {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch(ClassNotFoundException e) {
+            return false;
+        }
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO UserRegistry VALUES (?,?)");
+            pstmt.setInt(1, user.getId());
+            pstmt.setString(2, user.getUserName());
+            pstmt.executeUpdate();
+            try {
+                if(conn != null) {
+                    conn.close();
+                }
+            } catch(SQLException e) {
+                return false;
+            }
+            return true;
+        } catch(SQLException e) {
+            return false;
+}        
+    }
+
 }
