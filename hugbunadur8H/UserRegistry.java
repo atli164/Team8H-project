@@ -24,9 +24,10 @@ public class UserRegistry {
         	PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM UserRegistry WHERE userId = ?");
         	pstmt.setInt(1, userId);
         	pstmt.setString(2, userName);
+        	ResultSet r = pstmt.executeQuery();
         	while(r.next()) {
         		int _userId = r.getInt(1);
-        		int _userName = r.getString(2);
+        		String _userName = r.getString(2);
         		User result = new User(_userId, _userName);
         	}
         } catch(SQLException e) {
