@@ -23,11 +23,6 @@ public class ReviewRegistry {
         	conn = DriverManager.getConnection("jdbc:sqlite:data.db");
         	PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM ReviewRegistry WHERE id = ?");
         	pstmt.setInt(1, id);
-        	pstmt.setInt(2, userId);
-        	pstmt.setInt(3, hotelId);
-        	pstmt.setInt(4, stars);
-        	pstmt.setString(5, content);
-        	pstmt.setDate(6, java.sql.Date.valueOf(leftAt));
         	ResultSet r = pstmt.executeQuery();
         	while(r.next()) {
         		int _id = r.getInt(1);
