@@ -11,6 +11,39 @@ import java.sql.PreparedStatement;
 
 public class UserRegistry {
 	
+	public static User getUser(int userId) {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch(ClassNotFoundException e) {
+            return null;
+        }		
+	
+        Connection conn = null;
+        try {
+        	conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+        	PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM UserRegistry WHERE userId = ?");
+        	pstmt.setInt(1, userId);
+        	pstmt.setString(2, userName);
+        	while(r.next()) {
+        		int _userId = r.getInt(1);
+        		int _userName = r.getString(2);
+        		User result = new User(_userId, _userName);
+        	}
+        } catch(SQLException e) {
+            result = null;
+        } finally {
+            try {
+                if(conn != null) {
+                    conn.close();
+                }
+            } catch(SQLException e) {
+                result = null;
+            } finally {
+                return result;
+            }
+        }		
+	}
+	
 	public static ArrayList<User> search(int userId, String userName) {
         try {
             Class.forName("org.sqlite.JDBC");
