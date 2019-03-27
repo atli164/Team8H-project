@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 
 public class ReviewRegistry {
 	
-	public static User getReview(int id) {
+    public static User getReview(int id) {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch(ClassNotFoundException e) {
