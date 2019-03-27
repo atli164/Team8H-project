@@ -48,9 +48,9 @@ public class ReviewRegistry {
                 return result;
             }
         }		
-	}
+    }
 	
-	public static ArrayList<Review> search(int id, int userId, int hotelId, int stars, 
+    public static ArrayList<Review> search(int id, int userId, int hotelId, int stars, 
 			String content, LocalDate leftAt, User author, Hotel aboutHotel) {
         try {
             Class.forName("org.sqlite.JDBC");
