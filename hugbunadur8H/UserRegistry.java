@@ -68,7 +68,7 @@ public class UserRegistry {
             return true;
         } catch(SQLException e) {
             return false;
-}        
+        }        
     }
 
     public static boolean addUser(User user) {
@@ -94,7 +94,6 @@ public class UserRegistry {
             return true;
         } catch(SQLException e) {
             return false;
-}        
+        }        
     }
-
 }
