@@ -1,0 +1,11 @@
+3 test case fyrir methoduna okkar, sem er að fá til baka bókanir fyrir tiltekið tímabil:
+
+1. setja eitthvað inn og fá eitthvað út
+2. biðja um eitthvað sem við vitum að eigi ekki að koma
+3. edge case
+
+í @before: insert í sql það sem við notum í testinu
+í @after: delete-a það sem við notuðum í testinu
+
+Muna að hafa gögn í gagnagrunninum sem eru fyrir utan það sem munum nota, t.d.
+hafa bókanir fyrir utan tímabilið sem við ætlum að leita að.
