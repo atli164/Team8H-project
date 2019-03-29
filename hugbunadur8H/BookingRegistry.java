@@ -31,8 +31,8 @@ public class BookingRegistry {
                 int _id = r.getInt(1);
                 int _userId = r.getInt(2);
                 int _roomId = r.getInt(3);
-                LocalDate _fromDate = r.getObject(4, LocalDate.class);
-                LocalDate _toDate = r.getObject(5, LocalDate.class);
+                LocalDate _fromDate = r.getDate(4).toLocalDate();
+                LocalDate _toDate = r.getDate(5).toLocalDate();
                 String _requests = r.getString(6);
                 // get ekki bætt við user og room eins og er því við erum ekki með
                 // user registry og room registry svo ég set það sem null þar til
@@ -73,8 +73,8 @@ public class BookingRegistry {
             int _id = r.getInt(1);
             int _userId = r.getInt(2);
             int _roomId = r.getInt(3);
-            LocalDate _fromDate = r.getObject(4, LocalDate.class);
-            LocalDate _toDate = r.getObject(5, LocalDate.class);
+            LocalDate _fromDate = r.getDate(4).toLocalDate();
+            LocalDate _toDate = r.getDate(5).toLocalDate();
             String _requests = r.getString(6);
             // get ekki bætt við user og room eins og er því við erum ekki með
             // user registry og room registry svo ég set það sem null þar til
