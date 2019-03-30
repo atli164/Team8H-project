@@ -48,7 +48,7 @@ public class Room {
         return hasWifi;
     }
 
-    public boolean freeWifi() {
+    public boolean getFreeWifi() {
         return freeWifi;
     }
 
