@@ -43,7 +43,7 @@ public class Hotel {
         return hasGym;
     }
 
-    public boolean getHasCub() {
+    public boolean getHasClub() {
         return hasClub;
     }
 
