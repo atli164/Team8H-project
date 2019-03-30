@@ -10,19 +10,24 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class BookingTest{
-	private BookingRegistry test;
+    private BookingRegistry test;
     private Booking testBooking;
+    private Booking testBooking1;
     private Room testRoom;
     private LocalDate date;
     @Before
     public void setUp() {
-		date = LocalDate.of(Integer.parseInt("2018"), Integer.parseInt("1"), Integer.parseInt("23"));
+	date = LocalDate.of(Integer.parseInt("2018"), Integer.parseInt("1"), Integer.parseInt("23"));
     	testBooking = new Booking(1, 1, 1, date, date, "Nothing", null, null);
+	testBooking1 = new Booking(2, 1, 1, date, date, "Nothing", null, null);
+	testBooking2 = new Booking(3, 1, 1, date, date, "Nothing", null, null);
     	testRoom = new Room(null, 1, 0, 0, 0, 0, false, false, false, false, false, false, false, false, false, false, 0);
     }
     @After
     public void tearDown(){
     	testBooking = null;
+	testBooking1 = null;
+	testBooking2 = null;
     	testRoom = null;
     }
     @Test
@@ -32,8 +37,7 @@ public class BookingTest{
     	 ArrayList<Booking> a = test.getBookings(date, date, testRoom);
     	 int oldSize = a.size();
     	 
-     	 Booking testBookings = new Booking(2, 1, 1, date, date, "Nothing", null, null);
-    	 test.addBooking(testBookings);
+    	 test.addBooking(testBooking2);
     	 
     	 ArrayList<Booking> b = test.getBookings(date, date, testRoom);
     	 assertTrue(oldSize < b.size());
@@ -66,6 +70,7 @@ public class BookingTest{
     @Test 
     public void addBookingTest(){  
     	test.addBooking(testBooking);
+	test.addBooking(testBooking1);
     	Booking b = test.getBooking(1);
     	
     	// Perform actions to be tested on the booking
