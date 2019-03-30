@@ -23,29 +23,27 @@ public class UserRegistry {
         	conn = DriverManager.getConnection("jdbc:sqlite:data.db");
         	PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM UserRegistry WHERE userId = ?");
         	pstmt.setInt(1, userId);
-        	pstmt.setString(2, userName);
         	ResultSet r = pstmt.executeQuery();
-        	while(r.next()) {
-        		int _userId = r.getInt(1);
-        		String _userName = r.getString(2);
-        		User result = new User(_userId, _userName);
-        	}
-        } catch(SQLException e) {
-            result = null;
-        } finally {
+            if(!r.next()) {
+                return null;
+            }
+            int _userId = r.getInt(1);
+            String _userName = r.getString(2);
+            User result = new User(_userId, _userName);
             try {
                 if(conn != null) {
                     conn.close();
                 }
             } catch(SQLException e) {
-                result = null;
-            } finally {
-                return result;
+                return null;
             }
-        }		
+            return result;
+        } catch(SQLException e) {
+            return null;
+        } 
 	}
 	
-	public static ArrayList<User> search(int userId, String userName) {
+	public static ArrayList<User> search(String userName) {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch(ClassNotFoundException e) {
@@ -56,12 +54,12 @@ public class UserRegistry {
         Connection conn = null;
         try {
         	conn = DriverManager.getConnection("jdbc:sqlite:data.db");
-        	PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM UserRegistry WHERE userId = ? OR userName = ?");
-        	pstmt.setInt(1, userId);
-        	pstmt.setString(2, userName);
+        	PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM UserRegistry WHERE userName LIKE ?");
+        	pstmt.setString(1, userName);
+            ResultSet r = pstmt.executeQuery();
         	while(r.next()) {
         		int _userId = r.getInt(1);
-        		int _userName = r.getString(2);
+        		String _userName = r.getString(2);
         		User result = new User(_userId, _userName);
         		userL.add(result);
         	}
