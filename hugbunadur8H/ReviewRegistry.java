@@ -8,49 +8,49 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.sql.Date;
 
 public class ReviewRegistry {
 	
-    public static User getReview(int id) {
+    public static Review getReview(int id) {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch(ClassNotFoundException e) {
             return null;
         }		
-	
         Connection conn = null;
         try {
         	conn = DriverManager.getConnection("jdbc:sqlite:data.db");
         	PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM ReviewRegistry WHERE id = ?");
         	pstmt.setInt(1, id);
         	ResultSet r = pstmt.executeQuery();
-        	while(r.next()) {
-        		int _id = r.getInt(1);
-        		User _author = UserRegistry.getUser(_id);
-        		int _userId = r.getInt(2);
-        		int _hotelId = r.getInt(3);
-        		Hotel _aboutHotel = HotelRegistry.getHotel(_hotelId);
-        		int _stars = r.getInt(4);
-        		String _content = r.getString(5);
-        		Date _leftAt = r.getObject(6, LocalDate.class);
-        		Review result = new Review(_id, _userId, _hotelId, _stars, _content, _leftAt,  _author, _aboutHotel);
-        	}
-        } catch(SQLException e) {
-            result = null;
-        } finally {
+            if(!r.next()) {
+                return null;
+            }
+            int _id = r.getInt(1);
+            User _author = UserRegistry.getUser(_id);
+            int _userId = r.getInt(2);
+            int _hotelId = r.getInt(3);
+            Hotel _aboutHotel = null; 
+            // hotelregistry ekki komið
+            int _stars = r.getInt(4);
+            String _content = r.getString(5);
+            LocalDate _leftAt = r.getDate(6).toLocalDate();
+            Review result = new Review(_id, _userId, _hotelId, _stars, _content, _leftAt,  _author, _aboutHotel);
             try {
                 if(conn != null) {
                     conn.close();
                 }
             } catch(SQLException e) {
-                result = null;
-            } finally {
-                return result;
+                return null;
             }
-        }		
+            return result;
+        } catch(SQLException e) {
+            return null;
+        }
     }
 	
-    public static ArrayList<Review> search(int id, int userId, int hotelId, int stars, 
+    public static ArrayList<Review> search(Integer id, Integer userId, Integer hotelId, Integer stars, 
 			String content, LocalDate leftAt, User author, Hotel aboutHotel) {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -128,10 +128,11 @@ public class ReviewRegistry {
         		User _author = UserRegistry.getUser(_id);
         		int _userId = r.getInt(2);
         		int _hotelId = r.getInt(3);
-        		Hotel _aboutHotel = HotelRegistry.getHotel(_hotelId);
+        		Hotel _aboutHotel = null;
+                // hotelregistry ekki komið
         		int _stars = r.getInt(4);
         		String _content = r.getString(5);
-        		Date _leftAt = r.getObject(6, LocalDate.class);
+        		LocalDate _leftAt = r.getDate(6).toLocalDate();
         		Review result = new Review(_id, _userId, _hotelId, _stars, _content, _leftAt,  _author, _aboutHotel);
         		reviewL.add(result);
         	}
@@ -190,7 +191,7 @@ public class ReviewRegistry {
             pstmt.setInt(3, review.getHotelId());
             pstmt.setInt(4, review.getStars());
             pstmt.setString(5, review.getContent());
-            pstmt.setDate(6, java.sql.valueOf(review.getLeftAt()));
+            pstmt.setDate(6, java.sql.Date.valueOf(review.getLeftAt()));
             pstmt.executeUpdate();
             try {
                 if(conn != null) {

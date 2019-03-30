@@ -75,10 +75,9 @@ public class BookingRegistry {
             LocalDate _fromDate = r.getDate(4).toLocalDate();
             LocalDate _toDate = r.getDate(5).toLocalDate();
             String _requests = r.getString(6);
-            // get ekki bætt við user og room eins og er því við erum ekki með
-            // user registry og room registry svo ég set það sem null þar til
-            // það er til og getum beðið um room og hotel útfrá id
-            Booking result = new Booking(_id, _userId, _roomId, _fromDate, _toDate, _requests, null, null);
+            User booker = UserRegistry.getUser(_userId);
+            Room booked = RoomRegistry.getRoom(_roomId);
+            Booking result = new Booking(_id, _userId, _roomId, _fromDate, _toDate, _requests, booker, booked);
             try {
                 if(conn != null) {
                     conn.close();
