@@ -31,8 +31,7 @@ public class ReviewRegistry {
             User _author = UserRegistry.getUser(_id);
             int _userId = r.getInt(2);
             int _hotelId = r.getInt(3);
-            Hotel _aboutHotel = null; 
-            // hotelregistry ekki komið
+            Hotel _aboutHotel = HotelRegistry.getHotel(_hotelId); 
             int _stars = r.getInt(4);
             String _content = r.getString(5);
             LocalDate _leftAt = r.getDate(6).toLocalDate();
@@ -60,56 +59,24 @@ public class ReviewRegistry {
 
         String sqlSearchString = "SELECT * FROM ReviewRegistry WHERE ";
         boolean addOr = false;
+        String[] paramStrings = {"userId", "hotelId", "stars", "content", "leftAt"};
+        Object[] paramObs = {userId, hotelId, stars, content, leftAt};
         
         if(id != null) {
         	sqlSearchString += "id = ?";
         	addOr = true;
         }
         
-        if(userId != null) {
-        	if(addOr) {
-        		sqlSearchString += " OR userId = ?";
-        	} else {
-        		sqlSearchString += "userId = ?";
-        		addOr = true;
-        	}
+        for (int i = 0; i < paramObs.length; i++) {
+            if(paramObs[i] != null) {
+                if(addOr) {
+                    sqlSearchString += " OR " + paramStrings[i] + " = ?";
+                } else {
+                    sqlSearchString += paramStrings[i] + " = ?";
+                    addOr = true;
+                }
+            }
         }
-        
-        if(hotelId != null) {
-        	if(addOr) {
-        		sqlSearchString += " OR hotelId = ?";
-        	} else {
-        		sqlSearchString += "hotelId = ?";
-        		addOr = true;
-        	}
-        }        
-
-        if(stars != null) {
-        	if(addOr) {
-        		sqlSearchString += " OR stars = ?";
-        	} else {
-        		sqlSearchString += "stars = ?";
-        		addOr = true;
-        	}
-        }        
-        
-        if(content != null) {
-        	if(addOr) {
-        		sqlSearchString += " OR content = ?";
-        	} else {
-        		sqlSearchString += "content = ?";
-        		addOr = true;
-        	}
-        } 
-        
-        if(leftAt != null) {
-        	if(addOr) {
-        		sqlSearchString += " OR leftAt = ?";
-        	} else {
-        		sqlSearchString += "leftAt = ?";
-        		addOr = true;
-        	}
-        } 
         
         ArrayList<Review> reviewL = new ArrayList<Review>();
         Connection conn = null;
@@ -128,8 +95,7 @@ public class ReviewRegistry {
         		User _author = UserRegistry.getUser(_id);
         		int _userId = r.getInt(2);
         		int _hotelId = r.getInt(3);
-        		Hotel _aboutHotel = null;
-                // hotelregistry ekki komið
+        		Hotel _aboutHotel = HotelRegistry.getHotel(_hotelId);
         		int _stars = r.getInt(4);
         		String _content = r.getString(5);
         		LocalDate _leftAt = r.getDate(6).toLocalDate();
