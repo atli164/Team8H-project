@@ -161,7 +161,7 @@ public class HotelRegistry {
         }
     }
 
-    public static boolean addBooking(Hotel h) {
+    public static boolean addHotel(Hotel h) {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch(ClassNotFoundException e) {
