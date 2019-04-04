@@ -20,7 +20,7 @@ public class ReviewRegistry {
         }		
         Connection conn = null;
         try {
-        	conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+        	conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
         	PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM ReviewRegistry WHERE id = ?");
         	pstmt.setInt(1, id);
         	ResultSet r = pstmt.executeQuery();
@@ -81,7 +81,7 @@ public class ReviewRegistry {
         ArrayList<Review> reviewL = new ArrayList<Review>();
         Connection conn = null;
         try {
-        	conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+        	conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
         	PreparedStatement pstmt = conn.prepareStatement(sqlSearchString);
         	pstmt.setInt(1, id);
         	pstmt.setInt(2, userId);
@@ -125,7 +125,7 @@ public class ReviewRegistry {
         }
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM ReviewRegistry WHERE id = ?");
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
@@ -150,7 +150,7 @@ public class ReviewRegistry {
         }
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO ReviewRegistry VALUES (?,?,?,?,?,?)");
             pstmt.setInt(1, review.getId());
             pstmt.setInt(2, review.getUserId());

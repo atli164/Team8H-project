@@ -20,7 +20,7 @@ public class UserRegistry {
 	
         Connection conn = null;
         try {
-        	conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+        	conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
         	PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM UserRegistry WHERE userId = ?");
         	pstmt.setInt(1, userId);
         	ResultSet r = pstmt.executeQuery();
@@ -53,7 +53,7 @@ public class UserRegistry {
         ArrayList<User> userL = new ArrayList<User>();
         Connection conn = null;
         try {
-        	conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+        	conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
         	PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM UserRegistry WHERE userName LIKE ?");
         	pstmt.setString(1, userName);
             ResultSet r = pstmt.executeQuery();
@@ -86,7 +86,7 @@ public class UserRegistry {
         }
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM BookingRegistry WHERE userId = ?");
             pstmt.setInt(1, userId);
             pstmt.executeUpdate();
@@ -111,7 +111,7 @@ public class UserRegistry {
         }
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO UserRegistry VALUES (?,?)");
             pstmt.setInt(1, user.getId());
             pstmt.setString(2, user.getUserName());

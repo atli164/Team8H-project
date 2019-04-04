@@ -20,7 +20,7 @@ public class BookingRegistry {
         ArrayList<Booking> res = new ArrayList<Booking>();
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM BookingRegistry WHERE (fromDate " +
                     "<= ? OR toDate >= ?) AND roomId = ?");
             pstmt.setDate(1, java.sql.Date.valueOf(toDate));
@@ -62,7 +62,7 @@ public class BookingRegistry {
         }
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM BookingRegistry WHERE id = ?");
             pstmt.setInt(1, id);
             ResultSet r = pstmt.executeQuery();
@@ -99,7 +99,7 @@ public class BookingRegistry {
         }
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM BookingRegistry WHERE fromDate " +
                     "<= ? AND toDate >= ? AND roomId = ?");
             pstmt.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
@@ -128,7 +128,7 @@ public class BookingRegistry {
         }
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM BookingRegistry WHERE id = ?");
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
@@ -153,7 +153,7 @@ public class BookingRegistry {
         }
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO BookingRegistry VALUES (?,?,?,?,?,?)");
             pstmt.setInt(1, book.getId());
             pstmt.setInt(2, book.getUserId());

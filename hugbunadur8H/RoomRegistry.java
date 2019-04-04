@@ -21,7 +21,7 @@ public class RoomRegistry {
         ArrayList<Room> res = new ArrayList<Room>();
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             ArrayList<String> req = new ArrayList<String>();
             ArrayList<Integer> vals = new ArrayList<Integer>();
             if(rq.limitToHotel) {
@@ -145,7 +145,7 @@ public class RoomRegistry {
         }
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM RoomRegistry WHERE id = ?");
             pstmt.setInt(1, id);
             ResultSet r = pstmt.executeQuery();
@@ -195,7 +195,7 @@ public class RoomRegistry {
         }
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM RoomRegistry WHERE id = ?");
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
@@ -220,7 +220,7 @@ public class RoomRegistry {
         }
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:data.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO RoomRegistry VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             pstmt.setInt(1, rm.getId());
             pstmt.setInt(2, rm.getHotelId());
