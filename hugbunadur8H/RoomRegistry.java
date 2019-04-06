@@ -212,7 +212,7 @@ public class RoomRegistry {
         }
     }
 
-    public static boolean addBooking(Room rm) {
+    public static boolean addRoom(Room rm) {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch(ClassNotFoundException e) {
