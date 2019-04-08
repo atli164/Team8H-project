@@ -25,36 +25,39 @@ public class HotelRegistry {
             ArrayList<String> req = new ArrayList<String>();
             ArrayList<Integer> vals = new ArrayList<Integer>();
             if(hq.mustHavePool) {
-                req.add("hasPool = TRUE");
+                req.add("hasPool = 'true'");
                 vals.add(null);
             }
             if(hq.mustHaveGym) {
-                req.add("hasGym = TRUE");
+                req.add("hasGym = 'true'");
                 vals.add(null);
             }
             if(hq.mustHaveClub) {
-                req.add("hasClub = TRUE");
+                req.add("hasClub = 'true'");
                 vals.add(null);
             }
             if(hq.minStars > 0) {
                 req.add("stars >= ?");
                 vals.add(hq.minStars);
             }
-            String qry = "SELECT * FROM HotelRegistry WHERE";
+            String qry = "SELECT * FROM HotelRegistry";
             StringJoiner spaceJoin = new StringJoiner(" ");
             StringJoiner andJoin = new StringJoiner(" AND ");
             for(int i = 0; i < req.size(); ++i) {
                 andJoin.add(req.get(i));
             }
-            if(hq.orderByName) {
-                andJoin.add("ORDER BY name ASC");
-            } else if(hq.orderByStars) {
-                andJoin.add("ORDER BY stars DESC");
-            } else if(hq.orderByPos) {
-                andJoin.add("ORDER BY ABS(? - latiPos) + ABS(? - longPos) ASC");
-            }
             spaceJoin.add(qry);
-            spaceJoin.add(andJoin.toString());
+            if(!andJoin.toString().isEmpty()) {
+                spaceJoin.add("WHERE");
+                spaceJoin.add(andJoin.toString());
+            }
+            if(hq.orderByName) {
+                spaceJoin.add("ORDER BY name ASC");
+            } else if(hq.orderByStars) {
+                spaceJoin.add("ORDER BY stars DESC");
+            } else if(hq.orderByPos) {
+                spaceJoin.add("ORDER BY ABS(? - latiPos) + ABS(? - longPos) ASC");
+            }
             PreparedStatement pstmt = conn.prepareStatement(spaceJoin.toString());
             int pos = 1;
             for(int i = 0; i < req.size(); ++i) {
@@ -75,9 +78,9 @@ public class HotelRegistry {
                 double _latiPos = r.getDouble(4);
                 double _longPos = r.getDouble(5);
                 int _stars = r.getInt(6);
-                boolean _hasPool = r.getBoolean(7);
-                boolean _hasGym = r.getBoolean(8);
-                boolean _hasClub = r.getBoolean(9);
+                boolean _hasPool = r.getString(7).equals("true");
+                boolean _hasGym = r.getString(8).equals("true");
+                boolean _hasClub = r.getString(9).equals("true");
                 Hotel result = new Hotel(_id, _name, _postNum, _latiPos, _longPos, _stars,
                         _hasPool, _hasGym, _hasClub);
                 res.add(result);
@@ -118,9 +121,9 @@ public class HotelRegistry {
             double _latiPos = r.getDouble(4);
             double _longPos = r.getDouble(5);
             int _stars = r.getInt(6);
-            boolean _hasPool = r.getBoolean(7);
-            boolean _hasGym = r.getBoolean(8);
-            boolean _hasClub = r.getBoolean(9);
+            boolean _hasPool = r.getString(7).equals("true");
+            boolean _hasGym = r.getString(8).equals("true");
+            boolean _hasClub = r.getString(9).equals("true");
             Hotel result = new Hotel(_id, _name, _postNum, _latiPos, _longPos, _stars,
                     _hasPool, _hasGym, _hasClub);
             try {
