@@ -114,7 +114,7 @@ public class BookingRegistry {
             } catch(SQLException e) {
                 return null;
             }
-            return new Boolean(ans);
+            return ans;
         } catch(SQLException e) {
             return null;
         }
