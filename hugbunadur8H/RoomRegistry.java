@@ -37,39 +37,39 @@ public class RoomRegistry {
                 vals.add(rq.maxBedNum);
             }
             if(rq.mustHaveWifi) {
-                req.add("hasWifi = TRUE");
+                req.add("hasWifi = 'true'");
                 vals.add(null);
             }
             if(rq.mustHaveBreakfast) {
-                req.add("hasBreakfast = TRUE");
+                req.add("hasBreakfast = 'true'");
                 vals.add(null);
             }
             if(rq.mustHaveParking) {
-                req.add("hasParking = TRUE");
+                req.add("hasParking = 'true'");
                 vals.add(null);
             }
             if(rq.mustBeSmoking) {
-                req.add("isSmoking = TRUE");
+                req.add("isSmoking = 'true'");
                 vals.add(null);
             }
             if(rq.mustHaveView) {
-                req.add("withAView = TRUE");
+                req.add("withAView = 'true'");
                 vals.add(null);
             }
             if(rq.mustHaveBath) {
-                req.add("hasBath = TRUE");
+                req.add("hasBath = 'true'");
                 vals.add(null);
             }
             if(rq.mustHaveAC) {
-                req.add("hasAC = TRUE");
+                req.add("hasAC = 'true'");
                 vals.add(null);
             }
             if(rq.mustHaveMinibar) {
-                req.add("hasMinibar = TRUE");
+                req.add("hasMinibar = 'true'");
                 vals.add(null);
             }
             if(rq.mustHaveDailyCleaning) {
-                req.add("dailyCleaning = TRUE");
+                req.add("dailyCleaning = 'true'");
                 vals.add(null);
             }
             if(rq.minCostPerNight > 0) {
@@ -80,14 +80,17 @@ public class RoomRegistry {
                 req.add("costPerNight <= ?");
                 vals.add(rq.maxCostPerNight);
             }
-            String qry = "SELECT * FROM RoomRegistry WHERE";
+            String qry = "SELECT * FROM RoomRegistry";
             StringJoiner spaceJoin = new StringJoiner(" ");
             StringJoiner andJoin = new StringJoiner(" AND ");
             for(int i = 0; i < req.size(); ++i) {
                 andJoin.add(req.get(i));
             }
             spaceJoin.add(qry);
-            spaceJoin.add(andJoin.toString());
+            if(!andJoin.toString().isEmpty()) {
+                spaceJoin.add("WHERE");
+                spaceJoin.add(andJoin.toString());
+            }
             PreparedStatement pstmt = conn.prepareStatement(spaceJoin.toString());
             int pos = 1;
             for(int i = 0; i < req.size(); ++i) {
@@ -103,21 +106,20 @@ public class RoomRegistry {
                 int _singleBeds = r.getInt(3);
                 int _doubleBeds = r.getInt(4);
                 int _foldedBeds = r.getInt(5);
-                boolean _hasWifi = r.getBoolean(6);
-                boolean _freeWifi = r.getBoolean(7);
-                boolean _hasBreakfast = r.getBoolean(8);
-                boolean _breakfastPrePaid = r.getBoolean(9);
-                boolean _hasParking = r.getBoolean(10);
-                boolean _isSmoking = r.getBoolean(11);
-                boolean _withAView = r.getBoolean(12);
-                boolean _hasBath = r.getBoolean(13);
-                boolean _hasAC = r.getBoolean(14);
-                boolean _hasMinibar = r.getBoolean(15);
-                boolean _dailyCleaning = r.getBoolean(16);
+                boolean _hasWifi = r.getString(6).equals("true");
+                boolean _freeWifi = r.getString(7).equals("true");
+                boolean _hasBreakfast = r.getString(8).equals("true");
+                boolean _breakfastPrePaid = r.getString(9).equals("true");
+                boolean _hasParking = r.getString(10).equals("true");
+                boolean _isSmoking = r.getString(11).equals("true");
+                boolean _withAView = r.getString(12).equals("true");
+                boolean _hasBath = r.getString(13).equals("true");
+                boolean _hasAC = r.getString(14).equals("true");
+                boolean _hasMinibar = r.getString(15).equals("true");
+                boolean _dailyCleaning = r.getString(16).equals("true");
                 int _costPerNight = r.getInt(17);
-                // get ekki bætt við hotel eins og er því við erum ekki með dótið
-                // lími allt saman í lokin
-                Room result = new Room(null, _id, _hotelId, _singleBeds, _doubleBeds, _foldedBeds,
+                Hotel _h = HotelRegistry.getHotel(_hotelId);
+                Room result = new Room(_h, _id, _hotelId, _singleBeds, _doubleBeds, _foldedBeds,
                         _hasWifi, _freeWifi, _hasBreakfast, _breakfastPrePaid, _isSmoking,
                         _withAView, _hasBath, _hasAC, _hasMinibar, _dailyCleaning, _costPerNight);
                 res.add(result);
@@ -157,21 +159,20 @@ public class RoomRegistry {
             int _singleBeds = r.getInt(3);
             int _doubleBeds = r.getInt(4);
             int _foldedBeds = r.getInt(5);
-            boolean _hasWifi = r.getBoolean(6);
-            boolean _freeWifi = r.getBoolean(7);
-            boolean _hasBreakfast = r.getBoolean(8);
-            boolean _breakfastPrePaid = r.getBoolean(9);
-            boolean _hasParking = r.getBoolean(10);
-            boolean _isSmoking = r.getBoolean(11);
-            boolean _withAView = r.getBoolean(12);
-            boolean _hasBath = r.getBoolean(13);
-            boolean _hasAC = r.getBoolean(14);
-            boolean _hasMinibar = r.getBoolean(15);
-            boolean _dailyCleaning = r.getBoolean(16);
+            boolean _hasWifi = r.getString(6).equals("true");
+            boolean _freeWifi = r.getString(7).equals("true");
+            boolean _hasBreakfast = r.getString(8).equals("true");
+            boolean _breakfastPrePaid = r.getString(9).equals("true");
+            boolean _hasParking = r.getString(10).equals("true");
+            boolean _isSmoking = r.getString(11).equals("true");
+            boolean _withAView = r.getString(12).equals("true");
+            boolean _hasBath = r.getString(13).equals("true");
+            boolean _hasAC = r.getString(14).equals("true");
+            boolean _hasMinibar = r.getString(15).equals("true");
+            boolean _dailyCleaning = r.getString(16).equals("true");
             int _costPerNight = r.getInt(17);
-            // get ekki bætt við hotel eins og er því við erum ekki með dótið
-            // lími allt saman í lokin
-            Room result = new Room(null, _id, _hotelId, _singleBeds, _doubleBeds, _foldedBeds,
+            Hotel _h = HotelRegistry.getHotel(_hotelId);
+            Room result = new Room(_h, _id, _hotelId, _singleBeds, _doubleBeds, _foldedBeds,
                     _hasWifi, _freeWifi, _hasBreakfast, _breakfastPrePaid, _isSmoking,
                     _withAView, _hasBath, _hasAC, _hasMinibar, _dailyCleaning, _costPerNight);
             try {
