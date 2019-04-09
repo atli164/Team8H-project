@@ -4,6 +4,7 @@ import java.util.StringJoiner;
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class CLI {
     static String bookingToString(Booking b) {
@@ -374,7 +375,145 @@ public class CLI {
                     System.out.println("No resuts found.");
                 }
             } else if(t.charAt(0) == 'b') {
-                System.exit(0);
+                int bookedId;
+                Room toBook;
+                System.out.println("Enter the id of the room you wish to book.");
+                while(true) {
+                    t = s.nextLine();
+                    try {
+                        bookedId = Integer.parseInt(t);
+                        toBook = RoomRegistry.getRoom(bookedId);
+                        if(toBook == null) {
+                            System.out.println("Room not found. Try again.");
+                            t = s.nextLine();
+                        } else {
+                            break;
+                        }
+                    } catch(NumberFormatException e) {
+                        t = s.nextLine();
+                    }
+                }
+                int startYear;
+                System.out.println("Please enter the year of the first day of your visit.");
+                t = s.nextLine();
+                while(true) {
+                    try {
+                        startYear = Integer.parseInt(t);
+                        if(startYear < 2000 || startYear > 3000) {
+                            System.out.println("That is not a valid year. Please try again.");
+                            t = s.nextLine();
+                        } else {
+                            break;
+                        }
+                    } catch(NumberFormatException e) {
+                        t = s.nextLine();
+                    }
+                }
+                int startMonth;
+                System.out.println("Please enter the month of the first day of your visit (1, 2, ..., 12).");
+                t = s.nextLine();
+                while(true) {
+                    try {
+                        startMonth = Integer.parseInt(t);
+                        if(startMonth < 1 || startMonth > 12) {
+                            System.out.println("That is not a valid month. Please try again.");
+                            t = s.nextLine();
+                        } else {
+                            break;
+                        }
+                    } catch(NumberFormatException e) {
+                        t = s.nextLine();
+                    }
+                }
+                int startDay;
+                System.out.println("Please enter the day of the month of the first day of your visit (1, 2, ..., 31).");
+                t = s.nextLine();
+                while(true) {
+                    try {
+                        startDay = Integer.parseInt(t);
+                        if(startDay < 1 || startDay > LocalDate.of(startYear, startMonth, 1).lengthOfMonth()) {
+                            System.out.println("That is not a valid day of your entered month. Please try again.");
+                            t = s.nextLine();
+                        } else {
+                            break;
+                        }
+                    } catch(NumberFormatException e) {
+                        t = s.nextLine();
+                    }
+                }
+                LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
+                int endYear;
+                System.out.println("Please enter the year of the last date of your visit.");
+                t = s.nextLine();
+                while(true) {
+                    try {
+                        endYear = Integer.parseInt(t);
+                        if(endYear < 2000 || endYear > 3000) {
+                            System.out.println("That is not a valid year. Please try again.");
+                            t = s.nextLine();
+                        } else {
+                            break;
+                        }
+                    } catch(NumberFormatException e) {
+                        t = s.nextLine();
+                    }
+                }
+                int endMonth;
+                System.out.println("Please enter the month of the last day of your visit (1, 2, ..., 12).");
+                t = s.nextLine();
+                while(true) {
+                    try {
+                        endMonth = Integer.parseInt(t);
+                        if(endMonth < 1 || endMonth > 12) {
+                            System.out.println("That is not a valid month. Please try again.");
+                            t = s.nextLine();
+                        } else {
+                            break;
+                        }
+                    } catch(NumberFormatException e) {
+                        t = s.nextLine();
+                    }
+                }
+                int endDay;
+                System.out.println("Please enter the day of the month of the last day of your visit (1, 2, ..., 31).");
+                t = s.nextLine();
+                while(true) {
+                    try {
+                        endDay = Integer.parseInt(t);
+                        if(endDay < 1 || endDay > LocalDate.of(endYear, endMonth, 1).lengthOfMonth()) {
+                            System.out.println("That is not a valid day of your entered month. Please try again.");
+                            t = s.nextLine();
+                        } else {
+                            break;
+                        }
+                    } catch(NumberFormatException e) {
+                        t = s.nextLine();
+                    }
+                }
+                LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
+                if(endDate.compareTo(startDate) < 0) {
+                    System.out.println("Start date can not be after end date.");
+                } else if(startDate.compareTo(LocalDate.now()) < 0) {
+                    System.out.println("Can not book rooms into the past.");
+                } else {
+                    ArrayList<Booking> other = BookingRegistry.getBookings(startDate, endDate, toBook);
+                    if(!other.isEmpty()) {
+                        System.out.println("Sorry, but your booking overlaps an existing booking. Please try a different room or time frame.");
+                    } else {
+                        // Harð kóða user fyrst við ætlum ekki að sýna neitt af því
+                        int userId = 1;
+                        User u = UserRegistry.getUser(userId);
+                        System.out.println("If you have any special requests, please enter them now and they will be forwarded.");
+                        String req = s.nextLine();
+                        int nwId = BookingRegistry.getNewId();
+                        Booking nwBook = new Booking(nwId, userId, toBook.getId(), startDate, endDate, req, u, toBook);
+                        if(BookingRegistry.addBooking(nwBook)) {
+                            System.out.println("Booking added.");
+                        } else {
+                            System.out.println("Booking addition failed.");
+                        }
+                    }
+                }
             } else {
                 System.out.println("Unrecognized command");
             }
