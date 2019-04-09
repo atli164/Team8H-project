@@ -174,4 +174,34 @@ public class BookingRegistry {
             return false;
         }
     }
+
+    public static Integer getNewId() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch(ClassNotFoundException e) {
+            return null;
+        }
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:hotelData.db");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT MAX(id) from BookingRegistry");
+            ResultSet r = pstmt.executeQuery();
+            Integer res;
+            if(!r.next()) {
+                res = null;
+            } else {
+                res = r.getInt(1) + 1;
+            }
+            try {
+                if(conn != null) {
+                    conn.close();
+                }
+            } catch(SQLException e) {
+                return null;
+            }
+            return res;
+        } catch(SQLException e) {
+            return null;
+        }
+    }
 }
